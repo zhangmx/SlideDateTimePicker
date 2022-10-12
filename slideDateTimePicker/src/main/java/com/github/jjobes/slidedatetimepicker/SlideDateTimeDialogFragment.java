@@ -6,20 +6,30 @@ import java.util.Date;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+//import android.app.DialogFragment;
+//import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+//import android.support.v4.app.DialogFragment;
+//import android.support.v4.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.FragmentPagerAdapter;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * <p>The {@code DialogFragment} that contains the {@link SlidingTabLayout}
@@ -40,6 +50,7 @@ public class SlideDateTimeDialogFragment extends DialogFragment implements DateF
     private static SlideDateTimeListener mListener;
 
     private Context mContext;
+//    private Activity mActivity;
     private CustomViewPager mViewPager;
     private ViewPagerAdapter mViewPagerAdapter;
     private SlidingTabLayout mSlidingTabLayout;
@@ -59,6 +70,8 @@ public class SlideDateTimeDialogFragment extends DialogFragment implements DateF
         DateUtils.FORMAT_SHOW_WEEKDAY |
         DateUtils.FORMAT_SHOW_DATE |
         DateUtils.FORMAT_ABBREV_ALL;
+
+//    private FragmentManager mFragmentManager;
 
     public SlideDateTimeDialogFragment()
     {
@@ -109,7 +122,7 @@ public class SlideDateTimeDialogFragment extends DialogFragment implements DateF
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
-
+//        mActivity = activity;
         mContext = activity;
     }
 
@@ -217,7 +230,15 @@ public class SlideDateTimeDialogFragment extends DialogFragment implements DateF
 
     private void initViewPager()
     {
-        mViewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+//            mViewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+//        }
+
+//        android.app.FragmentManager fm =  mActivity.getFragmentManager();
+//        mViewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+//        mViewPagerAdapter = new ViewPagerAdapter(mFragmentManager);
+        mViewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager());
+
         mViewPager.setAdapter(mViewPagerAdapter);
 
         // Setting this custom layout for each tab ensures that the tabs will
@@ -379,6 +400,7 @@ public class SlideDateTimeDialogFragment extends DialogFragment implements DateF
                     mCalendar.get(Calendar.DAY_OF_MONTH),
                     mMinDate,
                     mMaxDate);
+                Log.d("DateTimePicker", "DateFragment");
                 dateFragment.setTargetFragment(SlideDateTimeDialogFragment.this, 100);
                 return dateFragment;
             case 1:

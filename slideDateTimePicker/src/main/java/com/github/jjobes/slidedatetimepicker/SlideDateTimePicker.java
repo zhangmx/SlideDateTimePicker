@@ -1,10 +1,18 @@
 package com.github.jjobes.slidedatetimepicker;
 
+//import android.app.Fragment;
+//import android.app.FragmentManager;
+//import android.app.FragmentTransaction;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import java.util.Date;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+//import android.support.v4.app.Fragment;
+//import android.support.v4.app.FragmentManager;
+//import android.support.v4.app.FragmentTransaction;
 
 /**
  * <p>This class contains methods for the library client to create
@@ -21,7 +29,7 @@ public class SlideDateTimePicker
     public static final int HOLO_DARK = 1;
     public static final int HOLO_LIGHT = 2;
 
-    private FragmentManager mFragmentManager;
+    private final FragmentManager mFragmentManager;
     private SlideDateTimeListener mListener;
     private Date mInitialDate;
     private Date mMinDate;

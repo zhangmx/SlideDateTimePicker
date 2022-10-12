@@ -1,7 +1,7 @@
 package com.github.jjobes.slidedatetimepicker;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
+//import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,8 +9,14 @@ import android.view.ViewConfiguration;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+//https://developer.android.com/develop/ui/views/animations/vp2-migration
+
+//import androidx.viewpager2.widget.ViewPager2;
+
 /**
- * A custom {@link android.support.v4.view.ViewPager} implementation that corrects
+ * A custom {@link androidx.core.view.ViewPager} implementation that corrects
  * the height of the ViewPager and also dispatches touch events to either the ViewPager
  * or the date or time picker depending on the direction of the swipe.
  *
@@ -66,8 +72,9 @@ public class CustomViewPager extends ViewPager
         }
 
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(height, MeasureSpec.EXACTLY);
-
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(widthMeasureSpec, heightMeasureSpec);
+        // TODO there is error here
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         mDatePicker = (DatePicker) findViewById(R.id.datePicker);
         mTimePicker = (TimePicker) findViewById(R.id.timePicker);

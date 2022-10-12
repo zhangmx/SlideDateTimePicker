@@ -1,24 +1,76 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.github.jjobes.slidedatetimepicker.sample"
-        minSdkVersion 14
-        targetSdkVersion 23
+        minSdk 25
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        viewBinding true
+    }
+
+    productFlavors {
+    }
+
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
+    lint {
+        abortOnError false
+    }
+
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    androidResources {
+        additionalParameters '--warn-manifest-validation'
+    }
+
+//    compileSdkVersion 23
+//    buildToolsVersion "23.0.2"
+//
+//    defaultConfig {
+//        applicationId "com.github.jjobes.slidedatetimepicker.sample"
+//        minSdkVersion 14
+//        targetSdkVersion 23
+//    }
+//
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+//        }
+//    }
+
+    namespace 'com.github.jjobes.slidedatetimepicker.sample'
 }
 
 dependencies {
-    compile project(':slideDateTimePicker')
-    compile 'com.android.support:support-v4:23.1.1'
+    implementation "androidx.fragment:fragment:1.5.0"
+    implementation "androidx.appcompat:appcompat:1.5.0"
+    implementation project(':slideDateTimePicker')
 }
